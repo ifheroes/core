@@ -1,4 +1,4 @@
-# Repository Name
+# IFHeroes Minigame Core
 
 ## Description
 Provide a brief description of the resource, its purpose, and functionality.

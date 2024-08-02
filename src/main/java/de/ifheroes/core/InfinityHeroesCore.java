@@ -2,9 +2,6 @@ package de.ifheroes.core;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
-import de.ifheroes.core.profile.HeroProfileKey;
-import de.ifheroes.core.profile.types.HeroProfileLanguage;
-
 /*
  * Representing the initial class loaded by Bukkit
  */
@@ -27,8 +24,6 @@ public class InfinityHeroesCore extends JavaPlugin{
 	
 	@Override
 	public void onEnable() {
-		HeroProfileLanguage profileLanguage = getAPI().getProfile("hahaha").get(HeroProfileKey.LANGUAGE, HeroProfileLanguage.class);
-		System.out.println(profileLanguage);
 		super.onEnable();
 	}
 	

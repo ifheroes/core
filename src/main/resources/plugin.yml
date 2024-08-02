@@ -1,0 +1,7 @@
+api-version: 1.20
+main: de.ifheroes.core
+
+name: InfinityHeroes-Core
+version: 0.1
+author: AkabeX86, IDev-MC, IFHeroes
+description: Representing the main api service for InfinityHeroes systems

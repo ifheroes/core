@@ -1,5 +1,7 @@
 package de.ifheroes.core.profile;
 
+import de.ifheroes.core.profile.types.HeroProfileType;
+
 /*
  * Represents the player profile
  */
@@ -14,7 +16,7 @@ public interface HeroProfile {
 	 * key is the key to the data (just like in a map)
 	 * type is the return type
 	 */
-	<C implements HeroProfileType> C get(HeroProfileKey key, Class<C> type);
+	<C extends HeroProfileType> C get(HeroProfileKey key, Class<C> type);
 	<C> C get(String key, C type);
 	
 	/*

@@ -19,9 +19,9 @@ public interface HeroProfile {
 	 * type is the return type
 	 */
 	<C extends HeroProfileType> Optional<C> get(HeroProfileKey key, Class<C> type);
-	<C extends HeroProfileType> Optional<C> get(String key, C type);
+	<C extends HeroProfileType> Optional<C> get(String key, Class<C> type);
 	<C> Optional<C> getGeneric(HeroProfileKey key, Class<C> type);
-	<C> Optional<C> getGeneric(String key, C type);
+	<C> Optional<C> getGeneric(String key, Class<C> type);
 	
 	/*
 	 * Gets the players data from the local server
@@ -30,10 +30,10 @@ public interface HeroProfile {
 	 * key is the key to the data (just like in a map)
 	 * type is the return type
 	 */
-	<C extends HeroProfileType> Optional<C> getLocal(HeroProfileKey key, C type);
-	<C extends HeroProfileType> Optional<C> getLocal(String key, C type);
-	<C> Optional<C> getLocalGeneric(HeroProfileKey key, C type);
-	<C> Optional<C> getLocalGeneric(String key, C type);
+	<C extends HeroProfileType> Optional<C> getLocal(HeroProfileKey key, Class<C> type);
+	<C extends HeroProfileType> Optional<C> getLocal(String key, Class<C> type);
+	<C> Optional<C> getLocalGeneric(HeroProfileKey key, Class<C> type);
+	<C> Optional<C> getLocalGeneric(String key, Class<C> type);
 	
 	
 	/*

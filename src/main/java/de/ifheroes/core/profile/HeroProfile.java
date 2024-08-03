@@ -7,7 +7,7 @@ import de.ifheroes.core.profile.types.HeroProfileType;
 /*
  * Represents the player profile
  */
-public interface HeroProfile {
+public interface HeroProfile extends HeroProfileType{
 
 	
 	

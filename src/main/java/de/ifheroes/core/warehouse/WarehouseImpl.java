@@ -10,7 +10,6 @@ import com.google.gson.JsonObject;
  */
 public class WarehouseImpl implements Warehouse {
 
-
 	private String url;
 	private String restAPIKey;
 	
@@ -26,26 +25,12 @@ public class WarehouseImpl implements Warehouse {
 	}
 
 	@Override
-	public Optional<JsonObject> get(String key, String attributes) {
-		// TODO Auto-generated method stub
-		return Optional.empty();
-	}
-
-	@Override
 	public void set(String key, JsonObject value) {
 		// TODO Auto-generated method stub
 	}
 
 	@Override
-	public void update(String key, JsonObject value) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void delete(String key) {
 		// TODO Auto-generated method stub
-
 	}
-
 }

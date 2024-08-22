@@ -1,33 +1,61 @@
 package de.ifheroes.core.profile;
 
-import java.util.Optional;
+import java.util.UUID;
+
+import de.ifheroes.core.profile.levelstructur.plugin.PluginData;
+import de.ifheroes.core.profile.types.HeroProfileLanguage;
 
 /*
- * Represents the player profile
+ * Represents the player profile, encapsulating various levels of data such as basic, advanced, and plugin-specific data.
  */
 public interface HeroProfile {
-
 	
 	
-	/*
-	 * Gets the players data from the cloud
-	 * 
-	 * @params
-	 * key is the key to the data (just like in a map)
-	 * type is the return type
+	/**
+	 * Retrieves the unique identifier (UUID) for the player.
+	 *
+	 * @return the UUID of the player.
 	 */
-	<C> Optional<C> get(HeroProfileKey key, Class<C> type);
-	<C> Optional<C> get(String key, Class<C> type);
+	public UUID getUUID();
 	
-	/*
-	 * Sets the players data to the cloud
-	 * 
-	 * @params
-	 * key is the key to the data (just like in a map)
-	 * type is the data type
-	 * data is the data being set
-	 * 
+	/**
+	 * Retrieves the name of the player.
+	 *
+	 * @return the name of the player as a String.
 	 */
-	<C> void set(HeroProfileKey key, C data);
-	<C> void set(String key, C data);
+	public String getName();
+	
+	/**
+	 * Sets the name of the player.
+	 *
+	 * @param name the new name to be assigned to the player.
+	 */
+	public void setName(String name);
+	
+	
+	
+	
+	
+	/**
+	 * Advanced Data Level
+	 *
+	 * Retrieves the language setting associated with the player's profile.
+	 *
+	 * @return the player's language as a HeroProfileLanguage object.
+	 */
+	public HeroProfileLanguage getLanguage();
+	
+	
+	
+	
+	
+	
+	/**
+	 * Plugin Data
+	 *
+	 * Retrieves the plugin-specific data associated with the player's profile.
+	 *
+	 * @return the PluginData object containing custom plugin data.
+	 */
+	public PluginData getPluginData();
 }

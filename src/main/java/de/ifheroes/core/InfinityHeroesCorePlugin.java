@@ -4,8 +4,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class InfinityHeroesCorePlugin extends JavaPlugin{
 
-	private static InfinityHeroesCoreAPI api;
-	
+	private static InfinityHeroesCoreAPI api = new InfinityHeroesCoreAPIImpl();
 	static final InfinityHeroesCoreAPI getAPI() {
 		return api;
 	}
@@ -13,7 +12,7 @@ public class InfinityHeroesCorePlugin extends JavaPlugin{
 	@Override
 	public void onEnable() {
 		
-		//TODO: set the API
+		//TODO: set the warehouse in api
 		
 		super.onEnable();
 	}

@@ -4,11 +4,12 @@ import org.bukkit.entity.Player;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonSyntaxException;
 
 import de.ifheroes.core.profile.HeroProfile;
 import de.ifheroes.core.profile.HeroProfileImpl;
 import de.ifheroes.core.warehouse.Warehouse;
-import de.ifheroes.core.warehouse.WarehouseImpl;
+import de.ifheroes.core.warehouse.exceptions.WarehouseNotInitializedException;
 
 /*
  * This class represents the official interaction to others plugins
@@ -16,10 +17,6 @@ import de.ifheroes.core.warehouse.WarehouseImpl;
 public class InfinityHeroesCoreAPIImpl implements InfinityHeroesCoreAPI{
 
 	private Warehouse warehouse;
-	
-	public InfinityHeroesCoreAPIImpl(String url, String endPoint, String restAPIKey) {
-		warehouse = new WarehouseImpl(url, endPoint,restAPIKey);
-	}
 	
 	/*
 	 * This Method refers to the getProfile(String uuid) method.
@@ -42,7 +39,12 @@ public class InfinityHeroesCoreAPIImpl implements InfinityHeroesCoreAPI{
 	 */
 	@Override
 	public HeroProfile getProfile(String uuid) {
-		return new Gson().fromJson(getWarehouse().get(uuid).orElse(new JsonObject()), HeroProfileImpl.class);
+		try {
+			return new Gson().fromJson(getWarehouse().get(uuid).orElse(new JsonObject()), HeroProfileImpl.class);
+		} catch (JsonSyntaxException | WarehouseNotInitializedException e) {
+			e.printStackTrace();
+		} 
+		return null;
 	}
 	
 	/*
@@ -50,8 +52,14 @@ public class InfinityHeroesCoreAPIImpl implements InfinityHeroesCoreAPI{
 	 * 
 	 * @returns Warehouse interface
 	 */
-	private Warehouse getWarehouse() {
+	private Warehouse getWarehouse() throws WarehouseNotInitializedException {
+		if(warehouse == null) throw new WarehouseNotInitializedException();
 		return this.warehouse;
+	}
+
+	@Override
+	public void setWarehouse(Warehouse warehouse) {
+		this.warehouse = warehouse;
 	}
 	
 	

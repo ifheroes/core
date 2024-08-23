@@ -3,6 +3,7 @@ package de.ifheroes.core;
 import org.bukkit.entity.Player;
 
 import de.ifheroes.core.profile.HeroProfile;
+import de.ifheroes.core.warehouse.Warehouse;
 
 /*
  * Represents the API of the InfinityHeroesCore
@@ -17,7 +18,7 @@ public interface InfinityHeroesCoreAPI {
 	 * 
 	 * @returns HeroProfile
 	 */
-	public HeroProfile getProfile(Player player);
+	HeroProfile getProfile(Player player);
 	
 	/*
 	 * This Method creates a HeroProfile based on the received JsonObject/JsonString from the Warehouse
@@ -26,6 +27,7 @@ public interface InfinityHeroesCoreAPI {
 	 * 
 	 * @returns HeroProfile interface
 	 */
-	public HeroProfile getProfile(String uuid);
+	HeroProfile getProfile(String uuid);
 	
+	void setWarehouse(Warehouse warehouse);
 }

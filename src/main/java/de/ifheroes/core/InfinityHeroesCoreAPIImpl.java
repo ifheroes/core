@@ -17,8 +17,8 @@ public class InfinityHeroesCoreAPIImpl implements InfinityHeroesCoreAPI{
 
 	private Warehouse warehouse;
 	
-	public InfinityHeroesCoreAPIImpl(String url, String restAPIKey) {
-		warehouse = new WarehouseImpl(url, restAPIKey);
+	public InfinityHeroesCoreAPIImpl(String url, String endPoint, String restAPIKey) {
+		warehouse = new WarehouseImpl(url, endPoint,restAPIKey);
 	}
 	
 	/*

@@ -1,5 +1,4 @@
 Manifest-Version: 1.0
-Built-By: DeadC
-Build-Jdk: 22.0.1
+Build-Jdk-Spec: 22
 Created-By: Maven Integration for Eclipse
 

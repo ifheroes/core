@@ -1,5 +1,7 @@
 package de.ifheroes.core;
 
+import java.util.UUID;
+
 import org.bukkit.entity.Player;
 
 import de.ifheroes.core.profile.HeroProfile;
@@ -27,7 +29,8 @@ public interface InfinityHeroesCoreAPI {
 	 * 
 	 * @returns HeroProfile interface
 	 */
-	HeroProfile getProfile(String uuid);
+	HeroProfile getProfile(UUID uuid);
+	HeroProfile newProfile(UUID uuid, String name);
 	
 	void setWarehouse(Warehouse warehouse);
 }

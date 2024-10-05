@@ -103,8 +103,8 @@ public class PluginDataImpl implements PluginData {
      * @return A map where the key is a data identifier and the value is the associated data object.
      */
     @Override
-    public Map<String, Object> getPluginData(DomainKey domainKey) {
-        return getPluginData(domainKey.getDomain());
+    public Map<String, Object> getRawPluginData(DomainKey domainKey) {
+        return getRawPluginData(domainKey.getDomain());
     }
 
     /**
@@ -114,7 +114,7 @@ public class PluginDataImpl implements PluginData {
      * @return A map where the key is a data identifier and the value is the associated data object.
      */
     @Override
-    public Map<String, Object> getPluginData(String pluginName) {
+    public Map<String, Object> getRawPluginData(String pluginName) {
         return values.computeIfAbsent(pluginName, x -> new HashMap<>());
     }
 }

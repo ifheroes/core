@@ -10,9 +10,9 @@ import org.bukkit.Bukkit;
 public class PostRequestFailedException extends Exception {
     private static final long serialVersionUID = 1L;
 
-    private String endPoint;
-    private String jsonInputString;
-    private int httpResponse;
+    private final String endPoint;
+    private final String jsonInputString;
+    private final int httpResponse;
 
     /**
      * Constructor for the PostRequestFailedException.

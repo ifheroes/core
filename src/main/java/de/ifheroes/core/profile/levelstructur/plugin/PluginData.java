@@ -58,7 +58,7 @@ public interface PluginData {
      * @param domainKey The domain key representing the specific domain of the plugin data.
      * @return A map where the key is a string representing the data identifier, and the value is the associated data object.
      */
-    public Map<String, Object> getPluginData(DomainKey domainKey);
+    public Map<String, Object> getRawPluginData(DomainKey domainKey);
 
     /**
      * Retrieves a map of plugin data associated with a specific plugin name.
@@ -66,5 +66,5 @@ public interface PluginData {
      * @param pluginName The name of the plugin whose data is to be retrieved.
      * @return A map where the key is a string representing the data identifier, and the value is the associated data object.
      */
-    public Map<String, Object> getPluginData(String pluginName);
+    public Map<String, Object> getRawPluginData(String pluginName);
 }

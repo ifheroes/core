@@ -41,7 +41,7 @@ public class RestAPIImpl implements RestAPI{
      */
     @Override
     public String sendGetRequest(String endpoint) throws IOException, GetRequestFailedException {
-        String url = baseUrl + endpoint;
+        String url = baseUrl + "?uuid="+ endpoint;
         
         HttpURLConnection connection = (HttpURLConnection) URI.create(url).toURL().openConnection();
         connection.setRequestMethod("GET");
@@ -76,7 +76,7 @@ public class RestAPIImpl implements RestAPI{
      */
     @Override
     public boolean sendPostRequest(String endpoint, String jsonInputString) throws IOException, PostRequestFailedException {
-        String url = baseUrl + endpoint;
+        String url = baseUrl;
         HttpURLConnection connection = (HttpURLConnection) URI.create(url).toURL().openConnection();
         connection.setRequestMethod("POST");
         connection.setRequestProperty("Authorization", token);

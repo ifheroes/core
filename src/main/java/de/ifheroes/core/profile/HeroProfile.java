@@ -44,6 +44,7 @@ public interface HeroProfile {
 	 * @return the player's language as a HeroProfileLanguage object.
 	 */
 	public HeroProfileLanguage getLanguage();
+	public void setLanguage(HeroProfileLanguage heroProfileLanguage);
 	
 	
 	
@@ -58,4 +59,12 @@ public interface HeroProfile {
 	 * @return the PluginData object containing custom plugin data.
 	 */
 	public PluginData getPluginData();
+	
+	/**
+	 * 
+	 * Converte the Hero Profile to String data
+	 * 
+	 * @return A string of the HeroProfile
+	 */
+	public String toString();
 }

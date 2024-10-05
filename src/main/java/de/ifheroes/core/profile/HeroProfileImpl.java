@@ -2,6 +2,8 @@ package de.ifheroes.core.profile;
 
 import java.util.UUID;
 
+import com.google.gson.Gson;
+
 import de.ifheroes.core.profile.levelstructur.advanced.AdvancedData;
 import de.ifheroes.core.profile.levelstructur.advanced.AdvancedDataImpl;
 import de.ifheroes.core.profile.levelstructur.basic.BasicData;
@@ -129,6 +131,11 @@ public class HeroProfileImpl implements HeroProfile{
         return getAdvancedData().getLanguage();
     }
     
+    @Override
+    public void setLanguage(HeroProfileLanguage heroProfileLanguage) {
+    	getAdvancedData().setLanguage(heroProfileLanguage);
+    }
+    
     /*
      * Plugin Data
      * 
@@ -153,4 +160,10 @@ public class HeroProfileImpl implements HeroProfile{
     private void setPluginData(PluginDataImpl pluginData) {
         this.pluginData = pluginData;
     }
+    
+    @Override
+    public String toString() {
+    	return new Gson().toJson(this);
+    }
+    
 }

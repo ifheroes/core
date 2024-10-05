@@ -1,5 +1,9 @@
 package de.ifheroes.core;
 
+import java.util.UUID;
+
+import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 import com.google.gson.Gson;
@@ -8,7 +12,11 @@ import com.google.gson.JsonSyntaxException;
 
 import de.ifheroes.core.profile.HeroProfile;
 import de.ifheroes.core.profile.HeroProfileImpl;
+import de.ifheroes.core.profile.levelstructur.basic.BasicDataImpl;
+import de.ifheroes.core.warehouse.PostRequestBody;
+import de.ifheroes.core.warehouse.Section;
 import de.ifheroes.core.warehouse.Warehouse;
+import de.ifheroes.core.warehouse.exceptions.GetRequestFailedException;
 import de.ifheroes.core.warehouse.exceptions.WarehouseNotInitializedException;
 
 /*
@@ -27,7 +35,7 @@ public class InfinityHeroesCoreAPIImpl implements InfinityHeroesCoreAPI{
 	 */
 	@Override
 	public HeroProfile getProfile(Player player) {
-		return getProfile(player.getUniqueId().toString());
+		return getProfile(player.getUniqueId());
 	}
 
 	/*
@@ -38,11 +46,16 @@ public class InfinityHeroesCoreAPIImpl implements InfinityHeroesCoreAPI{
 	 * @returns HeroProfile interface
 	 */
 	@Override
-	public HeroProfile getProfile(String uuid) {
+	public HeroProfile getProfile(UUID uuid) {
 		try {
-			return new Gson().fromJson(getWarehouse().get(uuid).orElse(new JsonObject()), HeroProfileImpl.class);
+			return new Gson().fromJson(getWarehouse().get(uuid.toString()).orElse(new JsonObject()), HeroProfileImpl.class);
 		} catch (JsonSyntaxException | WarehouseNotInitializedException e) {
 			e.printStackTrace();
+		} catch (GetRequestFailedException  e) {
+			
+			//TODO: Change Temp Name to method getNameFromUUID
+			
+			return newProfile(uuid, "tmp");
 		} 
 		return null;
 	}
@@ -61,7 +74,18 @@ public class InfinityHeroesCoreAPIImpl implements InfinityHeroesCoreAPI{
 	public void setWarehouse(Warehouse warehouse) {
 		this.warehouse = warehouse;
 	}
+
+	@Override
+	public HeroProfile newProfile(UUID uuid, String name) {
+		HeroProfile profile = new HeroProfileImpl(new BasicDataImpl(uuid, name));
+		warehouse.post(uuid.toString(), new PostRequestBody(Section.NEWPLAYERDATA, uuid).put("name", name));
+		return profile;
+	}
 	
-	
-	
+	private String getNameFromUUID(UUID uuid) {
+		String name = "";
+		OfflinePlayer player = Bukkit.getOfflinePlayer(uuid);
+		if(player != null) name = player.getName();
+		return name;
+	}
 }

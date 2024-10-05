@@ -10,8 +10,8 @@ import org.bukkit.Bukkit;
 public class GetRequestFailedException extends Exception {
 
     private static final long serialVersionUID = 1L;
-    private String endPoint;
-    private int httpResponse;
+    private final String endPoint;
+    private final int httpResponse;
 
     /**
      * Constructor for the GetRequestFailedException.
@@ -32,6 +32,10 @@ public class GetRequestFailedException extends Exception {
     public void printStackTrace() {
         super.printStackTrace();
         Bukkit.getLogger().log(java.util.logging.Level.WARNING, 
-            "Couldn't send GET request to endpoint %s | Error code: %s".formatted(endPoint, httpResponse));
+            "Couldn't send GET request to endpoint %s | Error code: %s".formatted(endPoint, httpResponse)); 
     }
+    
+    public int getHttpResponse() {
+		return httpResponse;
+	}
 }

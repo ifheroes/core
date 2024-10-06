@@ -2,8 +2,11 @@ package de.ifheroes.core.profile;
 
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
+
 import com.google.gson.Gson;
 
+import de.ifheroes.core.profile.events.HeroProfileUpdateEvent;
 import de.ifheroes.core.profile.levelstructur.advanced.AdvancedData;
 import de.ifheroes.core.profile.levelstructur.advanced.AdvancedDataImpl;
 import de.ifheroes.core.profile.levelstructur.basic.BasicData;
@@ -11,6 +14,7 @@ import de.ifheroes.core.profile.levelstructur.basic.BasicDataImpl;
 import de.ifheroes.core.profile.levelstructur.plugin.PluginData;
 import de.ifheroes.core.profile.levelstructur.plugin.PluginDataImpl;
 import de.ifheroes.core.profile.types.HeroProfileLanguage;
+import de.ifheroes.core.warehouse.Section;
 
 /**
  * The HeroProfileImpl class provides a concrete implementation of the HeroProfile interface.
@@ -39,8 +43,8 @@ public class HeroProfileImpl implements HeroProfile{
      */
 	public HeroProfileImpl(BasicDataImpl basicData) {
 		setBasicData(basicData);
-		setAdvancedData(new AdvancedDataImpl());
-		setPluginData(new PluginDataImpl());
+		setAdvancedData(new AdvancedDataImpl(this));
+		setPluginData(new PluginDataImpl(this));
 	}
 	
 	/*
@@ -95,6 +99,8 @@ public class HeroProfileImpl implements HeroProfile{
     @Override
     public void setName(String name) {
         getBasicData().setName(name);
+        HeroProfileUpdateEvent update = new HeroProfileUpdateEvent(getBasicData().getUUID(), Section.BASICDATA, "name", name);
+        Bukkit.getPluginManager().callEvent(update);
     }
     
     /*
@@ -134,6 +140,8 @@ public class HeroProfileImpl implements HeroProfile{
     @Override
     public void setLanguage(HeroProfileLanguage heroProfileLanguage) {
     	getAdvancedData().setLanguage(heroProfileLanguage);
+    	HeroProfileUpdateEvent update = new HeroProfileUpdateEvent(getBasicData().getUUID(), Section.ADVANCEDDATA, "language", heroProfileLanguage.toString());
+        Bukkit.getPluginManager().callEvent(update);
     }
     
     /*

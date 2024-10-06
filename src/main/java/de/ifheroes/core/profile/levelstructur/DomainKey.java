@@ -17,7 +17,7 @@ public class DomainKey {
      * @param pluginName The name of the plugin, serving as the domain.
      * @param key The specific key within the domain.
      */
-    public DomainKey(String pluginName, String key) {
+    DomainKey(String pluginName, String key) {
         this.domain = pluginName;
         this.key = key;
     }

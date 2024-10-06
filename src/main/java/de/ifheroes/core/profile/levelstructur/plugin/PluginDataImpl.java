@@ -3,23 +3,33 @@ package de.ifheroes.core.profile.levelstructur.plugin;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.bukkit.Bukkit;
+
+import com.google.gson.Gson;
+
+import de.ifheroes.core.profile.HeroProfile;
+import de.ifheroes.core.profile.events.EventBound;
+import de.ifheroes.core.profile.events.HeroProfileUpdateEvent;
 import de.ifheroes.core.profile.levelstructur.DomainKey;
+import de.ifheroes.core.warehouse.Section;
 
 /**
  * The PluginDataImpl class provides a concrete implementation of the PluginData interface.
  * It manages plugin-specific data using a nested map structure where the first level key represents
  * the domain (usually the plugin name), and the second level key represents specific data identifiers.
  */
-public class PluginDataImpl implements PluginData {
+public class PluginDataImpl extends EventBound implements PluginData {
 
     private Map<String, Map<String, Object>> values;
+    private HeroProfile profile;
 
     /**
      * Default constructor.
      * Initializes the internal map to an empty HashMap.
      */
-    public PluginDataImpl() {
-        values = new HashMap<>();
+    public PluginDataImpl(HeroProfile profile) {
+        this.values = new HashMap<>();
+        this.profile = profile;
     }
 
     /**
@@ -33,6 +43,8 @@ public class PluginDataImpl implements PluginData {
         values
             .computeIfAbsent(domainKey.getDomain(), x -> new HashMap<>())
             .put(domainKey.getKey(), value);
+        
+        callEvent(profile.getUUID(), Section.PLUGINDATA, domainKey.getDomain(), new Gson().toJson(values.get(domainKey.getDomain())));
     }
 
     /**

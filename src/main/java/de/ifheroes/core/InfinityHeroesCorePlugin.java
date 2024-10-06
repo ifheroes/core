@@ -4,14 +4,19 @@ import java.util.UUID;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.google.gson.Gson;
+
 import de.ifheroes.core.profile.HeroProfile;
+import de.ifheroes.core.profile.events.HeroProfileUpdateEvent;
+import de.ifheroes.core.profile.levelstructur.DomainKey;
+import de.ifheroes.core.warehouse.Section;
 import de.ifheroes.core.warehouse.WarehouseImpl;
 
 public class InfinityHeroesCorePlugin extends JavaPlugin {
 
 	private static InfinityHeroesCoreAPI api = new InfinityHeroesCoreAPIImpl();
 
-	static final InfinityHeroesCoreAPI getAPI() {
+	public static final InfinityHeroesCoreAPI getAPI() {
 		return api;
 	}
 
@@ -26,21 +31,16 @@ public class InfinityHeroesCorePlugin extends JavaPlugin {
 	
 	public static void main(String[] args) {
 
-		
+	
 
 		UUID uuid = UUID.fromString("41e84db3-3d9a-4123-a070-22bcf28efe16");
-		
 		HeroProfile profile = api.getProfile(uuid);
 		
 		
+		System.out.println(new Gson().toJson(profile.getPluginData().getAllData()));
 		
-		
-		
-		
-/*		UUID secondUUID = UUID.fromString("2bfafaed-1e79-45d2-beac-2003cd8e57e7");
-		HeroProfile newProfile = api.getProfile(secondUUID); */
-		
-		
+	//	new HeroProfileUpdateEvent(uuid, Section.BASICDATA, "name", "test");
+
 		
 		
 		

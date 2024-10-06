@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 
 import de.ifheroes.core.profile.HeroProfile;
 import de.ifheroes.core.warehouse.Warehouse;
+import de.ifheroes.core.warehouse.exceptions.WarehouseNotInitializedException;
 
 /*
  * Represents the API of the InfinityHeroesCore
@@ -33,4 +34,9 @@ public interface InfinityHeroesCoreAPI {
 	HeroProfile newProfile(UUID uuid, String name);
 	
 	void setWarehouse(Warehouse warehouse);
+	
+	/*
+	 * TODO: TMP
+	 */
+	Warehouse getWarehouse() throws WarehouseNotInitializedException;
 }

@@ -2,11 +2,14 @@ package de.ifheroes.core.profile.levelstructur.basic;
 
 import java.util.UUID;
 
+import de.ifheroes.core.profile.events.EventBound;
+import de.ifheroes.core.warehouse.Section;
+
 /**
  * The BasicDataImpl class is a concrete implementation of the BasicData interface.
  * It manages the basic-level data for the HeroProfile.
  */
-public class BasicDataImpl implements BasicData {
+public class BasicDataImpl extends EventBound implements BasicData {
 
     private UUID uuid;
     private String name;
@@ -26,7 +29,7 @@ public class BasicDataImpl implements BasicData {
      */
     public BasicDataImpl(UUID uuid, String name) {
         this.uuid = uuid;
-        setName(name);
+        this.name = name;
     }
 
     /**
@@ -57,5 +60,6 @@ public class BasicDataImpl implements BasicData {
     @Override
     public void setName(String name) {
         this.name = name;
+        callEvent(uuid, Section.BASICDATA, "name", name);
     }
 }

@@ -1,21 +1,26 @@
 package de.ifheroes.core.profile.levelstructur.advanced;
 
+import de.ifheroes.core.profile.HeroProfile;
+import de.ifheroes.core.profile.events.EventBound;
 import de.ifheroes.core.profile.types.HeroProfileLanguage;
+import de.ifheroes.core.warehouse.Section;
 
 /**
  * The AdvancedDataImpl class is a concrete implementation of the AdvancedData interface.
  * It manages advanced-level data for a HeroProfile.
  */
-public class AdvancedDataImpl implements AdvancedData {
+public class AdvancedDataImpl extends EventBound implements AdvancedData {
 
     private HeroProfileLanguage language;
-
+    private HeroProfile profile;
+    
     /**
      * Default constructor.
      * Initializes the language to English (EN) by default.
      */
-    public AdvancedDataImpl() {
+    public AdvancedDataImpl(HeroProfile profile) {
         setLanguage(HeroProfileLanguage.EN);
+        this.profile = profile;
     }
 
     /**
@@ -46,5 +51,6 @@ public class AdvancedDataImpl implements AdvancedData {
     @Override
     public void setLanguage(HeroProfileLanguage language) {
         this.language = language;
+        callEvent(profile.getUUID(), Section.ADVANCEDDATA, "language", language.toString());
     }
 }

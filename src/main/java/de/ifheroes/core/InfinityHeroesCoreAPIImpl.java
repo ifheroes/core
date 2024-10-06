@@ -65,7 +65,7 @@ public class InfinityHeroesCoreAPIImpl implements InfinityHeroesCoreAPI{
 	 * 
 	 * @returns Warehouse interface
 	 */
-	private Warehouse getWarehouse() throws WarehouseNotInitializedException {
+	public Warehouse getWarehouse() throws WarehouseNotInitializedException {
 		if(warehouse == null) throw new WarehouseNotInitializedException();
 		return this.warehouse;
 	}

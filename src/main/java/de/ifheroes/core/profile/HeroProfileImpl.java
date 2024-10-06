@@ -99,8 +99,6 @@ public class HeroProfileImpl implements HeroProfile{
     @Override
     public void setName(String name) {
         getBasicData().setName(name);
-        HeroProfileUpdateEvent update = new HeroProfileUpdateEvent(getBasicData().getUUID(), Section.BASICDATA, "name", name);
-        Bukkit.getPluginManager().callEvent(update);
     }
     
     /*
@@ -140,8 +138,6 @@ public class HeroProfileImpl implements HeroProfile{
     @Override
     public void setLanguage(HeroProfileLanguage heroProfileLanguage) {
     	getAdvancedData().setLanguage(heroProfileLanguage);
-    	HeroProfileUpdateEvent update = new HeroProfileUpdateEvent(getBasicData().getUUID(), Section.ADVANCEDDATA, "language", heroProfileLanguage.toString());
-        Bukkit.getPluginManager().callEvent(update);
     }
     
     /*

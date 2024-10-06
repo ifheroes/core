@@ -2,6 +2,9 @@ package de.ifheroes.core.warehouse.exceptions;
 
 import org.bukkit.Bukkit;
 
+import de.ifheroes.core.Logger;
+import de.ifheroes.core.Logger.LogLevel;
+
 
 /**
  * Represents an exception that occurs when a POST request to a REST API fails.
@@ -34,8 +37,7 @@ public class PostRequestFailedException extends Exception {
     @Override
     public void printStackTrace() {
         super.printStackTrace();
-        Bukkit.getLogger().log(java.util.logging.Level.WARNING, 
-            "Couldn't send POST request to endpoint %s with JSON input %s | Error code: %d".formatted(endPoint, jsonInputString, httpResponse));
+        new Logger(LogLevel.ERROR).error("Couldn't send POST request to endpoint %s with JSON input %s | Error code: %d".formatted(endPoint, jsonInputString, httpResponse));
     }
 }
 

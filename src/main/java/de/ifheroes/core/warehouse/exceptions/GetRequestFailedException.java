@@ -2,6 +2,9 @@ package de.ifheroes.core.warehouse.exceptions;
 
 import org.bukkit.Bukkit;
 
+import de.ifheroes.core.Logger;
+import de.ifheroes.core.Logger.LogLevel;
+
 
 /**
  * Custom exception thrown when a GET request fails.
@@ -31,8 +34,7 @@ public class GetRequestFailedException extends Exception {
     @Override
     public void printStackTrace() {
         super.printStackTrace();
-        Bukkit.getLogger().log(java.util.logging.Level.WARNING, 
-            "Couldn't send GET request to endpoint %s | Error code: %s".formatted(endPoint, httpResponse)); 
+        new Logger(LogLevel.ERROR).error("Couldn't send GET request to endpoint %s | Error code: %s".formatted(endPoint, httpResponse));
     }
     
     public int getHttpResponse() {

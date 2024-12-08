@@ -1,6 +1,9 @@
 package de.ifheroes.core;
 
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutionException;
 
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -10,6 +13,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 
+import de.ifheroes.core.Logger.LogLevel;
 import de.ifheroes.core.profile.HeroProfile;
 import de.ifheroes.core.profile.HeroProfileImpl;
 import de.ifheroes.core.profile.levelstructur.basic.BasicDataImpl;
@@ -24,6 +28,8 @@ import de.ifheroes.core.warehouse.exceptions.WarehouseNotInitializedException;
  */
 public class InfinityHeroesCoreAPIImpl implements InfinityHeroesCoreAPI{
 
+	private static ConcurrentHashMap<UUID, CompletableFuture<HeroProfile>> profileCache = new ConcurrentHashMap<>();
+	
 	private Warehouse warehouse;
 	
 	/*
@@ -48,16 +54,28 @@ public class InfinityHeroesCoreAPIImpl implements InfinityHeroesCoreAPI{
 	@Override
 	public HeroProfile getProfile(UUID uuid) {
 		try {
-			return new Gson().fromJson(getWarehouse().get(uuid.toString()).orElse(new JsonObject()), HeroProfileImpl.class);
-		} catch (JsonSyntaxException | WarehouseNotInitializedException e) {
+			return profileCache.computeIfAbsent(uuid, x -> fetchProfile(uuid)).get();
+		} catch (InterruptedException | ExecutionException e) {
 			e.printStackTrace();
-		} catch (GetRequestFailedException  e) {
-			
-			//TODO: Change Temp Name to method getNameFromUUID
-			
-			return newProfile(uuid, "tmp");
-		} 
+		}
+		new Logger(LogLevel.ERROR).error("COULD NOT LOAD PROFILE %s".formatted(uuid.toString()));
 		return null;
+	}
+	
+	
+	public CompletableFuture<HeroProfile> fetchProfile(UUID uuid) {
+		return CompletableFuture.supplyAsync(() -> {
+			try {
+				HeroProfile profile = new Gson().fromJson(getWarehouse().get(uuid.toString()).orElse(new JsonObject()), HeroProfileImpl.class);
+				profile.setUUIDs();
+				return profile;
+			} catch (JsonSyntaxException | WarehouseNotInitializedException e) {
+				e.printStackTrace();
+			} catch (GetRequestFailedException  e) {
+				return newProfile(uuid, getNameFromUUID(uuid));
+			} 
+			return null;
+		});
 	}
 	
 	/*
@@ -78,14 +96,21 @@ public class InfinityHeroesCoreAPIImpl implements InfinityHeroesCoreAPI{
 	@Override
 	public HeroProfile newProfile(UUID uuid, String name) {
 		HeroProfile profile = new HeroProfileImpl(new BasicDataImpl(uuid, name));
-		warehouse.post(uuid.toString(), new PostRequestBody(Section.NEWPLAYERDATA, uuid).put("name", name));
+		try {
+			getWarehouse().post(uuid.toString(), new PostRequestBody(Section.NEWPLAYERDATA, uuid).put("name", name));
+		} catch (WarehouseNotInitializedException e) {
+			e.printStackTrace();
+		}
 		return profile;
 	}
 	
 	private String getNameFromUUID(UUID uuid) {
-		String name = "";
-		OfflinePlayer player = Bukkit.getOfflinePlayer(uuid);
-		if(player != null) name = player.getName();
+		
+		//TODO: Remove!
+		
+		String name = "I_Dev";
+	//	OfflinePlayer player = Bukkit.getOfflinePlayer(uuid);
+	//	if(player != null) name = player.getName();
 		return name;
 	}
 }

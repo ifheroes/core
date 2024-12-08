@@ -10,7 +10,8 @@ public class EventBound {
 
 	public void callEvent(UUID uuid, Section section, String key, String value) {
 		HeroProfileUpdateEvent update = new HeroProfileUpdateEvent(uuid, section, key, value);
-        Bukkit.getPluginManager().callEvent(update);
+		
+	 // TODO: Bukkit.getPluginManager().callEvent(update);
 	}
 	
 }

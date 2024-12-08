@@ -2,14 +2,12 @@ package de.ifheroes.core.profile.levelstructur.plugin;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import org.bukkit.Bukkit;
+import java.util.Optional;
+import java.util.UUID;
 
 import com.google.gson.Gson;
 
-import de.ifheroes.core.profile.HeroProfile;
 import de.ifheroes.core.profile.events.EventBound;
-import de.ifheroes.core.profile.events.HeroProfileUpdateEvent;
 import de.ifheroes.core.profile.levelstructur.DomainKey;
 import de.ifheroes.core.warehouse.Section;
 
@@ -21,15 +19,15 @@ import de.ifheroes.core.warehouse.Section;
 public class PluginDataImpl extends EventBound implements PluginData {
 
     private Map<String, Map<String, Object>> values;
-    private HeroProfile profile;
+    private UUID uuid;
 
     /**
      * Default constructor.
      * Initializes the internal map to an empty HashMap.
      */
-    public PluginDataImpl(HeroProfile profile) {
+    public PluginDataImpl(UUID uuid) {
         this.values = new HashMap<>();
-        this.profile = profile;
+        this.uuid = uuid;
     }
 
     /**
@@ -40,11 +38,13 @@ public class PluginDataImpl extends EventBound implements PluginData {
      */
     @Override
     public void set(DomainKey domainKey, Object value) {
+    	if(value == null) value = new HashMap<>();
+  
         values
             .computeIfAbsent(domainKey.getDomain(), x -> new HashMap<>())
             .put(domainKey.getKey(), value);
         
-        callEvent(profile.getUUID(), Section.PLUGINDATA, domainKey.getDomain(), new Gson().toJson(values.get(domainKey.getDomain())));
+        callEvent(uuid, Section.PLUGINDATA, "updater", new Gson().toJson(values));
     }
 
     /**
@@ -61,7 +61,11 @@ public class PluginDataImpl extends EventBound implements PluginData {
         Object value = values
             .getOrDefault(domainKey.getDomain(), new HashMap<>())
             .get(domainKey.getKey());
-
+        
+        Optional<String> t;
+        
+        //TODO: Optional
+        
         try {
             return clazz.cast(value);
         } catch (ClassCastException ex) {
@@ -129,4 +133,13 @@ public class PluginDataImpl extends EventBound implements PluginData {
     public Map<String, Object> getRawPluginData(String pluginName) {
         return values.computeIfAbsent(pluginName, x -> new HashMap<>());
     }
+
+	@Override
+	public UUID getUUID() {
+		return uuid;
+	}
+	
+	public void setUUID(UUID uuid) {
+		this.uuid = uuid;
+	}
 }

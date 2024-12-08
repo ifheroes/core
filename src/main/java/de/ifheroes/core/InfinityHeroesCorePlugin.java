@@ -2,48 +2,56 @@ package de.ifheroes.core;
 
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.google.gson.Gson;
-
+import de.ifheroes.core.Logger.LogLevel;
 import de.ifheroes.core.profile.HeroProfile;
-import de.ifheroes.core.profile.events.HeroProfileUpdateEvent;
-import de.ifheroes.core.profile.levelstructur.DomainKey;
-import de.ifheroes.core.warehouse.Section;
+import de.ifheroes.core.warehouse.ProfileRegister;
 import de.ifheroes.core.warehouse.WarehouseImpl;
 
 public class InfinityHeroesCorePlugin extends JavaPlugin {
 
 	private static InfinityHeroesCoreAPI api = new InfinityHeroesCoreAPIImpl();
-
+	
 	public static final InfinityHeroesCoreAPI getAPI() {
 		return api;
 	}
-
+	
 	@Override
 	public void onEnable() {
-
-		// TODO: set the warehouse in api
-		
 		super.onEnable();
-	}
+		
+		/*
+		 * Config
+		 */
+		getConfig().addDefault("warehouseurl", "");
+		getConfig().addDefault("bearertoken", "");
+		
+		getConfig().options().copyDefaults(true);
+		saveConfig();
+		
+		String url = getConfig().getString("warehouseurl");
+		String key = getConfig().getString("bearertoken");
 
-	
-	public static void main(String[] args) {
-
-	
-
-		UUID uuid = UUID.fromString("41e84db3-3d9a-4123-a070-22bcf28efe16");
-		HeroProfile profile = api.getProfile(uuid);
+		/*
+		 * Warehouse
+		 */
 		
+		if(url.equalsIgnoreCase("") || url == null) {
+			new Logger(LogLevel.ERROR).error("Warehouse couldn't be initialized");
+			api = null;
+			return;
+		}
 		
-		System.out.println(new Gson().toJson(profile.getPluginData().getAllData()));
+		//TODO: Check URL for validity
 		
-	//	new HeroProfileUpdateEvent(uuid, Section.BASICDATA, "name", "test");
-
+		api.setWarehouse(new WarehouseImpl(url, key));
+		new Logger(LogLevel.INFO).info("Warehouse has been initialized");
 		
-		
-		
-		
+		/*
+		 * Load ProfileRegister
+		 */
+		Bukkit.getPluginManager().registerEvents(new ProfileRegister(), this);
 	}
 }

@@ -1,6 +1,7 @@
 package de.ifheroes.core.profile.levelstructur.plugin;
 
 import java.util.Map;
+import java.util.UUID;
 
 import de.ifheroes.core.profile.levelstructur.DomainKey;
 
@@ -67,4 +68,7 @@ public interface PluginData {
      * @return A map where the key is a string representing the data identifier, and the value is the associated data object.
      */
     public Map<String, Object> getRawPluginData(String pluginName);
+    
+    
+    public UUID getUUID();
 }

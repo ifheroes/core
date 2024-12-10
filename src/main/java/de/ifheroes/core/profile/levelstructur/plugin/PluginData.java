@@ -1,6 +1,7 @@
 package de.ifheroes.core.profile.levelstructur.plugin;
 
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 import de.ifheroes.core.profile.levelstructur.DomainKey;
@@ -28,7 +29,7 @@ public interface PluginData {
      * @return The value associated with the domain key, cast to the specified type.
      * @throws ClassCastException If the retrieved value cannot be cast to the specified class type.
      */
-    public <T> T get(DomainKey domainKey, Class<T> clazz);
+    public <T> Optional<T> get(DomainKey domainKey, Class<T> clazz);
 
     /**
      * Checks if a value is present for the specified domain key.

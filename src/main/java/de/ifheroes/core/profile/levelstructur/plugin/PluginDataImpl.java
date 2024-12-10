@@ -5,6 +5,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
+import javax.annotation.Nonnull;
+
 import com.google.gson.Gson;
 
 import de.ifheroes.core.profile.events.EventBound;
@@ -37,9 +39,7 @@ public class PluginDataImpl extends EventBound implements PluginData {
      * @param value The value to be set for the given domain key.
      */
     @Override
-    public void set(DomainKey domainKey, Object value) {
-    	if(value == null) value = new HashMap<>();
-  
+    public void set(DomainKey domainKey, @Nonnull Object value) {
         values
             .computeIfAbsent(domainKey.getDomain(), x -> new HashMap<>())
             .put(domainKey.getKey(), value);
@@ -57,21 +57,10 @@ public class PluginDataImpl extends EventBound implements PluginData {
      *         Returns null if the value cannot be cast or is not present.
      */
     @Override
-    public <T> T get(DomainKey domainKey, Class<T> clazz) {
-        Object value = values
+    public <T> Optional<T> get(DomainKey domainKey, Class<T> clazz) {
+        return Optional.ofNullable(clazz.cast(values
             .getOrDefault(domainKey.getDomain(), new HashMap<>())
-            .get(domainKey.getKey());
-        
-        Optional<String> t;
-        
-        //TODO: Optional
-        
-        try {
-            return clazz.cast(value);
-        } catch (ClassCastException ex) {
-            ex.printStackTrace();
-        }
-        return null;
+            .get(domainKey.getKey())));
     }
 
     /**
@@ -94,11 +83,8 @@ public class PluginDataImpl extends EventBound implements PluginData {
      */
     @Override
     public boolean remove(DomainKey domainKey) {
-        if (values.containsKey(domainKey.getDomain())) {
-            values.get(domainKey.getDomain()).remove(domainKey.getKey());
-            return true;
-        }
-        return false;
+    	return values.containsKey(domainKey.getDomain())
+    			&& values.get(domainKey.getDomain()).remove(domainKey.getKey()) != null;
     }
 
     /**

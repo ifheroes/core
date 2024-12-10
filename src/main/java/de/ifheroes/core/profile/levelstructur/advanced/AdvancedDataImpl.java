@@ -31,7 +31,7 @@ public class AdvancedDataImpl extends EventBound implements AdvancedData {
      * @param language The HeroProfileLanguage to be set for the profile.
      */
     public AdvancedDataImpl(HeroProfileLanguage language) {
-    	language = HeroProfileLanguage.EN;
+    	this.language = language;
     }
     
     /**

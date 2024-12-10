@@ -4,9 +4,6 @@ import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import org.bukkit.event.Event;
-import org.bukkit.event.HandlerList;
-
 import de.ifheroes.core.InfinityHeroesCoreAPI;
 import de.ifheroes.core.InfinityHeroesCorePlugin;
 import de.ifheroes.core.Logger;
@@ -15,7 +12,7 @@ import de.ifheroes.core.warehouse.PostRequestBody;
 import de.ifheroes.core.warehouse.Section;
 import de.ifheroes.core.warehouse.exceptions.WarehouseNotInitializedException;
 
-public class HeroProfileUpdateEvent extends Event{
+public class HeroProfileUpdateEvent {
 	
 	private static final ExecutorService executor = Executors.newCachedThreadPool();
 	
@@ -29,6 +26,8 @@ public class HeroProfileUpdateEvent extends Event{
 		this.section = section;
 		this.key = key;
 		this.value = value;
+		
+		
 		
 		postUpdate();
 	}
@@ -58,10 +57,5 @@ public class HeroProfileUpdateEvent extends Event{
 	
 	public UUID getUuid() {
 		return uuid;
-	}
-	
-	@Override
-	public HandlerList getHandlers() {
-		return this.getHandlers();
 	}
 }

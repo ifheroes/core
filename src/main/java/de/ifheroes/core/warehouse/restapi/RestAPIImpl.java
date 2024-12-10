@@ -96,8 +96,6 @@ public class RestAPIImpl implements RestAPI {
 		connection.setRequestProperty("Content-Type", "application/json; utf-8");
 		connection.setDoOutput(true);
 		
-		System.out.println("Output: "+jsonInputString);
-		
 		try (OutputStream os = connection.getOutputStream()) {
 			byte[] input = jsonInputString.getBytes(StandardCharsets.UTF_8);
 			os.write(input, 0, input.length);
@@ -122,7 +120,6 @@ public class RestAPIImpl implements RestAPI {
 		
 
 		try (OutputStream os = connection.getOutputStream()) {
-			
 			try (Writer writer = new OutputStreamWriter(os, StandardCharsets.UTF_8)) {
 	            // Der JsonElement wird in seine JSON-Repräsentation umgewandelt
 	            writer.write(jsonElement.toString());

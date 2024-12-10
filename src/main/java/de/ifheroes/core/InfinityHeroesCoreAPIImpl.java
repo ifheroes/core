@@ -1,5 +1,6 @@
 package de.ifheroes.core;
 
+import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
@@ -95,22 +96,17 @@ public class InfinityHeroesCoreAPIImpl implements InfinityHeroesCoreAPI{
 
 	@Override
 	public HeroProfile newProfile(UUID uuid, String name) {
-		HeroProfile profile = new HeroProfileImpl(new BasicDataImpl(uuid, name));
 		try {
 			getWarehouse().post(uuid.toString(), new PostRequestBody(Section.NEWPLAYERDATA, uuid).put("name", name));
 		} catch (WarehouseNotInitializedException e) {
 			e.printStackTrace();
 		}
-		return profile;
+		return new HeroProfileImpl(new BasicDataImpl(uuid, name));
 	}
 	
 	private String getNameFromUUID(UUID uuid) {
-		
-		//TODO: Remove!
-		
-		String name = "I_Dev";
-	//	OfflinePlayer player = Bukkit.getOfflinePlayer(uuid);
-	//	if(player != null) name = player.getName();
-		return name;
+		return Optional.ofNullable(Bukkit.getOfflinePlayer(uuid))
+				.map(OfflinePlayer::getName)
+				.orElse("null");
 	}
 }

@@ -104,6 +104,23 @@ public class InfinityHeroesCoreAPIImpl implements InfinityHeroesCoreAPI{
 		return new HeroProfileImpl(new BasicDataImpl(uuid, name));
 	}
 	
+	@Override
+	public boolean deleteProfile(UUID uuid) {
+		try {
+			boolean status =  getWarehouse().delete(uuid.toString());
+			if(status) unloadProfile(uuid);
+			return status;
+		} catch (WarehouseNotInitializedException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	@Override
+	public void unloadProfile(UUID uuid) {
+		profileCache.remove(uuid);
+	}
+	
 	private String getNameFromUUID(UUID uuid) {
 		return Optional.ofNullable(Bukkit.getOfflinePlayer(uuid))
 				.map(OfflinePlayer::getName)

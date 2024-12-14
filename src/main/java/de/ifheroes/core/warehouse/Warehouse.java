@@ -34,6 +34,6 @@ public interface Warehouse {
 	 * @param key is being used for the deletion  of its data
 	 *
 	 */
-	public void delete(String key);
+	public boolean delete(String key);
 	
 }

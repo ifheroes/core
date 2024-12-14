@@ -15,6 +15,7 @@ E:\EWorkSpace\InfinityHeroesCore\src\main\java\de\ifheroes\core\profile\levelstr
 E:\EWorkSpace\InfinityHeroesCore\src\main\java\de\ifheroes\core\profile\levelstructur\plugin\PluginData.java
 E:\EWorkSpace\InfinityHeroesCore\src\main\java\de\ifheroes\core\profile\levelstructur\plugin\PluginDataImpl.java
 E:\EWorkSpace\InfinityHeroesCore\src\main\java\de\ifheroes\core\profile\types\HeroProfileLanguage.java
+E:\EWorkSpace\InfinityHeroesCore\src\main\java\de\ifheroes\core\warehouse\exceptions\DeleteRequestFailedException.java
 E:\EWorkSpace\InfinityHeroesCore\src\main\java\de\ifheroes\core\warehouse\exceptions\GetRequestFailedException.java
 E:\EWorkSpace\InfinityHeroesCore\src\main\java\de\ifheroes\core\warehouse\exceptions\PostRequestFailedException.java
 E:\EWorkSpace\InfinityHeroesCore\src\main\java\de\ifheroes\core\warehouse\exceptions\WarehouseNotInitializedException.java

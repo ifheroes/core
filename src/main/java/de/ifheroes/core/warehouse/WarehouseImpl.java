@@ -6,6 +6,7 @@ import java.util.Optional;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
+import de.ifheroes.core.warehouse.exceptions.DeleteRequestFailedException;
 import de.ifheroes.core.warehouse.exceptions.GetRequestFailedException;
 import de.ifheroes.core.warehouse.exceptions.PostRequestFailedException;
 import de.ifheroes.core.warehouse.restapi.RestAPI;
@@ -44,7 +45,12 @@ public class WarehouseImpl implements Warehouse {
 	}
 
 	@Override
-	public void delete(String key) {
-		// TODO Auto-generated method stub
+	public boolean delete(String key) {
+		try {
+			return restAPI.sendDeleteRequest(key);
+		} catch (IOException | DeleteRequestFailedException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 }

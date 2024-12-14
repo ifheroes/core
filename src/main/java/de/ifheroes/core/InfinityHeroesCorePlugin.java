@@ -42,7 +42,7 @@ public class InfinityHeroesCorePlugin extends JavaPlugin {
 		 */
 		
 		logger.info("Checking Warehouse URL and token...");
-		if (url.equalsIgnoreCase("") || !isURLandTokenValid(url, key, 1000)) {
+		if (url.equalsIgnoreCase("") || !isURLandTokenValid(url+"/?checkauth", key, 1000)) {
 			logger.error("Warehouse couldn't be initialized");
 			disablePlugin(this);
 			return;
@@ -64,7 +64,7 @@ public class InfinityHeroesCorePlugin extends JavaPlugin {
 	private boolean isURLandTokenValid(String url, String token, int timeout) {
 		try {
 			HttpURLConnection connection = (HttpURLConnection) URI.create(url).toURL().openConnection();
-			connection.setRequestMethod("HEAD");
+			connection.setRequestMethod("GET");
 			connection.setConnectTimeout(timeout);
 			connection.setReadTimeout(timeout);
 			connection.setRequestProperty("Authorization", token);

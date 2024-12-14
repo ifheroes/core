@@ -2,14 +2,14 @@ package de.ifheroes.core.profile.levelstructur.plugin;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
+import java.util.UUID;
 
-import org.bukkit.Bukkit;
+import javax.annotation.Nonnull;
 
 import com.google.gson.Gson;
 
-import de.ifheroes.core.profile.HeroProfile;
 import de.ifheroes.core.profile.events.EventBound;
-import de.ifheroes.core.profile.events.HeroProfileUpdateEvent;
 import de.ifheroes.core.profile.levelstructur.DomainKey;
 import de.ifheroes.core.warehouse.Section;
 
@@ -21,15 +21,15 @@ import de.ifheroes.core.warehouse.Section;
 public class PluginDataImpl extends EventBound implements PluginData {
 
     private Map<String, Map<String, Object>> values;
-    private HeroProfile profile;
+    private UUID uuid;
 
     /**
      * Default constructor.
      * Initializes the internal map to an empty HashMap.
      */
-    public PluginDataImpl(HeroProfile profile) {
+    public PluginDataImpl(UUID uuid) {
         this.values = new HashMap<>();
-        this.profile = profile;
+        this.uuid = uuid;
     }
 
     /**
@@ -39,12 +39,12 @@ public class PluginDataImpl extends EventBound implements PluginData {
      * @param value The value to be set for the given domain key.
      */
     @Override
-    public void set(DomainKey domainKey, Object value) {
+    public void set(DomainKey domainKey, @Nonnull Object value) {
         values
             .computeIfAbsent(domainKey.getDomain(), x -> new HashMap<>())
             .put(domainKey.getKey(), value);
         
-        callEvent(profile.getUUID(), Section.PLUGINDATA, domainKey.getDomain(), new Gson().toJson(values.get(domainKey.getDomain())));
+        callEvent(uuid, Section.PLUGINDATA, "updater", new Gson().toJson(values));
     }
 
     /**
@@ -57,17 +57,10 @@ public class PluginDataImpl extends EventBound implements PluginData {
      *         Returns null if the value cannot be cast or is not present.
      */
     @Override
-    public <T> T get(DomainKey domainKey, Class<T> clazz) {
-        Object value = values
+    public <T> Optional<T> get(DomainKey domainKey, Class<T> clazz) {
+        return Optional.ofNullable(clazz.cast(values
             .getOrDefault(domainKey.getDomain(), new HashMap<>())
-            .get(domainKey.getKey());
-
-        try {
-            return clazz.cast(value);
-        } catch (ClassCastException ex) {
-            ex.printStackTrace();
-        }
-        return null;
+            .get(domainKey.getKey())));
     }
 
     /**
@@ -90,11 +83,8 @@ public class PluginDataImpl extends EventBound implements PluginData {
      */
     @Override
     public boolean remove(DomainKey domainKey) {
-        if (values.containsKey(domainKey.getDomain())) {
-            values.get(domainKey.getDomain()).remove(domainKey.getKey());
-            return true;
-        }
-        return false;
+    	return values.containsKey(domainKey.getDomain())
+    			&& values.get(domainKey.getDomain()).remove(domainKey.getKey()) != null;
     }
 
     /**
@@ -129,4 +119,13 @@ public class PluginDataImpl extends EventBound implements PluginData {
     public Map<String, Object> getRawPluginData(String pluginName) {
         return values.computeIfAbsent(pluginName, x -> new HashMap<>());
     }
+
+	@Override
+	public UUID getUUID() {
+		return uuid;
+	}
+	
+	public void setUUID(UUID uuid) {
+		this.uuid = uuid;
+	}
 }

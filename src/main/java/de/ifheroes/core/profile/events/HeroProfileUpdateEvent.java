@@ -1,17 +1,20 @@
 package de.ifheroes.core.profile.events;
 
 import java.util.UUID;
-
-import org.bukkit.event.Event;
-import org.bukkit.event.HandlerList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import de.ifheroes.core.InfinityHeroesCoreAPI;
 import de.ifheroes.core.InfinityHeroesCorePlugin;
+import de.ifheroes.core.Logger;
+import de.ifheroes.core.Logger.LogLevel;
 import de.ifheroes.core.warehouse.PostRequestBody;
 import de.ifheroes.core.warehouse.Section;
 import de.ifheroes.core.warehouse.exceptions.WarehouseNotInitializedException;
 
-public class HeroProfileUpdateEvent extends Event{
+public class HeroProfileUpdateEvent {
+	
+	private static final ExecutorService executor = Executors.newCachedThreadPool();
 	
 	private final UUID uuid;
 	private final Section section;
@@ -24,12 +27,20 @@ public class HeroProfileUpdateEvent extends Event{
 		this.key = key;
 		this.value = value;
 		
+		
+		
+		postUpdate();
+	}
+	
+	public void postUpdate() {
 		InfinityHeroesCoreAPI api = InfinityHeroesCorePlugin.getAPI();
-		try {
-			api.getWarehouse().post(key, new PostRequestBody(section, uuid).put(key, value));
-		} catch (WarehouseNotInitializedException e) {
-			e.printStackTrace();
-		}
+		executor.submit(() -> {
+			try {
+				api.getWarehouse().post(key, new PostRequestBody(section, uuid).put(key, value));
+			} catch (WarehouseNotInitializedException e) {
+				new Logger(LogLevel.ERROR).error("Failed to update profile %s due to the Warehouse not beeing initialized.".formatted(uuid));
+			}
+		});
 	}
 	
 	public Section getSection() {
@@ -46,10 +57,5 @@ public class HeroProfileUpdateEvent extends Event{
 	
 	public UUID getUuid() {
 		return uuid;
-	}
-	
-	@Override
-	public HandlerList getHandlers() {
-		return this.getHandlers();
 	}
 }

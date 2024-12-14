@@ -33,6 +33,10 @@ public interface InfinityHeroesCoreAPI {
 	HeroProfile getProfile(UUID uuid);
 	HeroProfile newProfile(UUID uuid, String name);
 	
+	boolean deleteProfile(UUID uuid);
+	
+	void unloadProfile(UUID uuid);
+	
 	void setWarehouse(Warehouse warehouse);
 	
 	/*

@@ -47,7 +47,7 @@ public interface HeroProfile {
 	public void setLanguage(HeroProfileLanguage heroProfileLanguage);
 	
 	
-	
+	public void setUUIDs();
 	
 	
 	

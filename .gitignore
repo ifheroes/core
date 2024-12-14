@@ -25,3 +25,9 @@
 hs_err_pid*
 replay_pid*
 /bin/
+*.lst
+*.lst
+*.properties
+target/maven-archiver/pom.properties
+target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+target/classes/META-INF/maven/InfinityHeroesCore/InfinityHeroesCore/pom.properties

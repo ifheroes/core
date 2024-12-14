@@ -1,15 +1,15 @@
 package de.ifheroes.core;
 
-import java.util.UUID;
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URI;
 
+import org.bukkit.Bukkit;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.google.gson.Gson;
-
-import de.ifheroes.core.profile.HeroProfile;
-import de.ifheroes.core.profile.events.HeroProfileUpdateEvent;
-import de.ifheroes.core.profile.levelstructur.DomainKey;
-import de.ifheroes.core.warehouse.Section;
+import de.ifheroes.core.Logger.LogLevel;
+import de.ifheroes.core.warehouse.ProfileRegister;
 import de.ifheroes.core.warehouse.WarehouseImpl;
 
 public class InfinityHeroesCorePlugin extends JavaPlugin {
@@ -22,28 +22,56 @@ public class InfinityHeroesCorePlugin extends JavaPlugin {
 
 	@Override
 	public void onEnable() {
-
-		// TODO: set the warehouse in api
-		
 		super.onEnable();
+		Logger logger = new Logger(LogLevel.INFO);
+		
+		/*
+		 * Config
+		 */
+		getConfig().addDefault("warehouseurl", "");
+		getConfig().addDefault("bearertoken", "");
+
+		getConfig().options().copyDefaults(true);
+		saveConfig();
+
+		String url = getConfig().getString("warehouseurl");
+		String key = getConfig().getString("bearertoken");
+
+		/*
+		 * Warehouse
+		 */
+		
+		logger.info("Checking Warehouse URL and token...");
+		if (url.equalsIgnoreCase("") || !isURLandTokenValid(url+"/?checkauth", key, 1000)) {
+			logger.error("Warehouse couldn't be initialized");
+			disablePlugin(this);
+			return;
+		}
+		
+		api.setWarehouse(new WarehouseImpl(url, key));
+		new Logger(LogLevel.INFO).info("Warehouse has been initialized");
+		
+		/*
+		 * Load ProfileRegister
+		 */
+		Bukkit.getPluginManager().registerEvents(new ProfileRegister(), this);
 	}
 
-	
-	public static void main(String[] args) {
+	private void disablePlugin(Plugin plugin) {
+		Bukkit.getPluginManager().disablePlugin(plugin);
+	}
 
-	
-
-		UUID uuid = UUID.fromString("41e84db3-3d9a-4123-a070-22bcf28efe16");
-		HeroProfile profile = api.getProfile(uuid);
-		
-		
-		System.out.println(new Gson().toJson(profile.getPluginData().getAllData()));
-		
-	//	new HeroProfileUpdateEvent(uuid, Section.BASICDATA, "name", "test");
-
-		
-		
-		
-		
+	private boolean isURLandTokenValid(String url, String token, int timeout) {
+		try {
+			HttpURLConnection connection = (HttpURLConnection) URI.create(url).toURL().openConnection();
+			connection.setRequestMethod("GET");
+			connection.setConnectTimeout(timeout);
+			connection.setReadTimeout(timeout);
+			connection.setRequestProperty("Authorization", token);
+			int responseCode = connection.getResponseCode();
+			return (200 <= responseCode && responseCode <= 399);
+		} catch (IOException e) {
+			return false;
+		}
 	}
 }

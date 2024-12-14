@@ -2,6 +2,7 @@ package de.ifheroes.core.warehouse.restapi;
 
 import java.io.IOException;
 
+import de.ifheroes.core.warehouse.exceptions.DeleteRequestFailedException;
 import de.ifheroes.core.warehouse.exceptions.GetRequestFailedException;
 import de.ifheroes.core.warehouse.exceptions.PostRequestFailedException;
 
@@ -30,4 +31,6 @@ public interface RestAPI {
      * @throws PostRequestFailedException If the POST request fails and returns an HTTP error code.
      */
     boolean sendPostRequest(String endpoint, String jsonInputString) throws IOException, PostRequestFailedException;
+    
+    boolean sendDeleteRequest(String endpoint) throws IOException, DeleteRequestFailedException;
 }

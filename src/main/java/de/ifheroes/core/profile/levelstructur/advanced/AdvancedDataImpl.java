@@ -1,6 +1,7 @@
 package de.ifheroes.core.profile.levelstructur.advanced;
 
-import de.ifheroes.core.profile.HeroProfile;
+import java.util.UUID;
+
 import de.ifheroes.core.profile.events.EventBound;
 import de.ifheroes.core.profile.types.HeroProfileLanguage;
 import de.ifheroes.core.warehouse.Section;
@@ -12,15 +13,15 @@ import de.ifheroes.core.warehouse.Section;
 public class AdvancedDataImpl extends EventBound implements AdvancedData {
 
     private HeroProfileLanguage language;
-    private HeroProfile profile;
+    private UUID uuid;
     
     /**
      * Default constructor.
      * Initializes the language to English (EN) by default.
      */
-    public AdvancedDataImpl(HeroProfile profile) {
-        setLanguage(HeroProfileLanguage.EN);
-        this.profile = profile;
+    public AdvancedDataImpl(UUID uuid) {
+        language = HeroProfileLanguage.EN;
+        this.uuid = uuid;
     }
 
     /**
@@ -30,7 +31,7 @@ public class AdvancedDataImpl extends EventBound implements AdvancedData {
      * @param language The HeroProfileLanguage to be set for the profile.
      */
     public AdvancedDataImpl(HeroProfileLanguage language) {
-        setLanguage(language);
+    	this.language = language;
     }
     
     /**
@@ -51,6 +52,10 @@ public class AdvancedDataImpl extends EventBound implements AdvancedData {
     @Override
     public void setLanguage(HeroProfileLanguage language) {
         this.language = language;
-        callEvent(profile.getUUID(), Section.ADVANCEDDATA, "language", language.toString());
+        callEvent(uuid, Section.ADVANCEDDATA, "language", language.toString());
+    }
+    
+    public void setUUID(UUID uuid) {
+    	this.uuid = uuid;
     }
 }

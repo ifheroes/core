@@ -30,3 +30,4 @@ replay_pid*
 *.properties
 target/maven-archiver/pom.properties
 target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+target/classes/META-INF/maven/InfinityHeroesCore/InfinityHeroesCore/pom.properties

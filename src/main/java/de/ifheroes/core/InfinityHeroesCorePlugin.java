@@ -9,6 +9,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import de.ifheroes.core.Logger.LogLevel;
+import de.ifheroes.core.helper.gui.listeners.GUIInteract;
 import de.ifheroes.core.warehouse.ProfileRegister;
 import de.ifheroes.core.warehouse.WarehouseImpl;
 
@@ -55,6 +56,7 @@ public class InfinityHeroesCorePlugin extends JavaPlugin {
 		 * Load ProfileRegister
 		 */
 		Bukkit.getPluginManager().registerEvents(new ProfileRegister(), this);
+		Bukkit.getPluginManager().registerEvents(new GUIInteract(), this);
 	}
 
 	private void disablePlugin(Plugin plugin) {

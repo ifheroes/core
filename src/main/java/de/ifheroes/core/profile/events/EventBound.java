@@ -2,7 +2,7 @@ package de.ifheroes.core.profile.events;
 
 import java.util.UUID;
 
-import de.ifheroes.core.warehouse.Section;
+import de.ifheroes.core.data.warehouse.Section;
 
 public class EventBound {
 

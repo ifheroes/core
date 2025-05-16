@@ -2,8 +2,8 @@ package de.ifheroes.core.profile.levelstructur.basic;
 
 import java.util.UUID;
 
+import de.ifheroes.core.data.warehouse.Section;
 import de.ifheroes.core.profile.events.EventBound;
-import de.ifheroes.core.warehouse.Section;
 
 /**
  * The BasicDataImpl class is a concrete implementation of the BasicData interface.

@@ -8,16 +8,16 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import de.ifheroes.core.Logger.LogLevel;
+import de.ifheroes.core.data.warehouse.ProfileRegister;
+import de.ifheroes.core.data.warehouse.WarehouseImpl;
+import de.ifheroes.core.data.warehouse.exceptions.WarehouseNotInitializedException;
 import de.ifheroes.core.helper.gui.listeners.GUIInteract;
-import de.ifheroes.core.warehouse.ProfileRegister;
-import de.ifheroes.core.warehouse.WarehouseImpl;
 
 public class InfinityHeroesCorePlugin extends JavaPlugin {
 
-	private static InfinityHeroesCoreAPI api = new InfinityHeroesCoreAPIImpl();
+	private static final InfinityHeroesCoreAPI api = new WarehouseAPIBridge();
 
-	public static final InfinityHeroesCoreAPI getAPI() {
+	public static InfinityHeroesCoreAPI getAPI() {
 		return api;
 	}
 
@@ -57,23 +57,39 @@ public class InfinityHeroesCorePlugin extends JavaPlugin {
 		 */
 		Bukkit.getPluginManager().registerEvents(new ProfileRegister(), this);
 		Bukkit.getPluginManager().registerEvents(new GUIInteract(), this);
-	}
-
-	private void disablePlugin(Plugin plugin) {
-		Bukkit.getPluginManager().disablePlugin(plugin);
-	}
-
-	private boolean isURLandTokenValid(String url, String token, int timeout) {
+		/*
+		 * Helpers -> GUIManager
+		 */
+		Bukkit.getPluginManager().registerEvents(new GUIInteract(), this);
+		
+		
 		try {
-			HttpURLConnection connection = (HttpURLConnection) URI.create(url).toURL().openConnection();
-			connection.setRequestMethod("GET");
-			connection.setConnectTimeout(timeout);
-			connection.setReadTimeout(timeout);
-			connection.setRequestProperty("Authorization", token);
-			int responseCode = connection.getResponseCode();
-			return (200 <= responseCode && responseCode <= 399);
-		} catch (IOException e) {
+			System.out.println((api.getWarehouse() != null)+ " warehouse");
+		} catch (WarehouseNotInitializedException e) {
+			e.printStackTrace();
+		}
+		
+
+	private WarehouseLogin getWarehouseLogin() {
+		getConfig().addDefault("warehouseurl", "");
+		getConfig().addDefault("bearertoken", "");
+
+		getConfig().options().copyDefaults(true);
+		saveConfig();
+
+		return new WarehouseLogin(getConfig().getString("warehouseurl"), getConfig().getString("bearertoken"));
+	}
+
+	private boolean isWarehouseAvailable(WarehouseLogin warehouseLogin) {
+		Bukkit.getLogger().info("Checking Warehouse URL and token...");
+		if (warehouseLogin.url.equalsIgnoreCase("")
+				|| !isURLandTokenValid(warehouseLogin.url + "/?checkauth", warehouseLogin.token, 1000)) {
+			Bukkit.getLogger().warning("Warehouse couldn't be initialized");
 			return false;
 		}
+		return true;
 	}
+
+	private record WarehouseLogin(String url, String token) {}
+
 }

@@ -5,12 +5,18 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import de.ifheroes.core.InfinityHeroesCoreAPI;
+<<<<<<< Updated upstream
 import de.ifheroes.core.InfinityHeroesCorePlugin;
 import de.ifheroes.core.Logger;
 import de.ifheroes.core.Logger.LogLevel;
 import de.ifheroes.core.warehouse.PostRequestBody;
 import de.ifheroes.core.warehouse.Section;
 import de.ifheroes.core.warehouse.exceptions.WarehouseNotInitializedException;
+=======
+import de.ifheroes.core.data.warehouse.PostRequestBody;
+import de.ifheroes.core.data.warehouse.Section;
+import de.ifheroes.core.data.warehouse.exceptions.WarehouseNotInitializedException;
+>>>>>>> Stashed changes
 
 public class HeroProfileUpdateEvent {
 	

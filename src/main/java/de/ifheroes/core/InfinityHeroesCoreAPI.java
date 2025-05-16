@@ -4,9 +4,9 @@ import java.util.UUID;
 
 import org.bukkit.entity.Player;
 
+import de.ifheroes.core.data.warehouse.Warehouse;
+import de.ifheroes.core.data.warehouse.exceptions.WarehouseNotInitializedException;
 import de.ifheroes.core.profile.HeroProfile;
-import de.ifheroes.core.warehouse.Warehouse;
-import de.ifheroes.core.warehouse.exceptions.WarehouseNotInitializedException;
 
 /*
  * Represents the API of the InfinityHeroesCore

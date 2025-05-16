@@ -1,10 +1,10 @@
-package de.ifheroes.core.warehouse.restapi;
+package de.ifheroes.core.data.warehouse.restapi;
 
 import java.io.IOException;
 
-import de.ifheroes.core.warehouse.exceptions.DeleteRequestFailedException;
-import de.ifheroes.core.warehouse.exceptions.GetRequestFailedException;
-import de.ifheroes.core.warehouse.exceptions.PostRequestFailedException;
+import de.ifheroes.core.data.warehouse.exceptions.DeleteRequestFailedException;
+import de.ifheroes.core.data.warehouse.exceptions.GetRequestFailedException;
+import de.ifheroes.core.data.warehouse.exceptions.PostRequestFailedException;
 
 /**
  * This interface defines methods to interact with a REST API, allowing the sending of GET and POST requests.

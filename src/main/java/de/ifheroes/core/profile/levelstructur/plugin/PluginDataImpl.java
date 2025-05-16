@@ -9,9 +9,9 @@ import javax.annotation.Nonnull;
 
 import com.google.gson.Gson;
 
+import de.ifheroes.core.data.warehouse.Section;
 import de.ifheroes.core.profile.events.EventBound;
 import de.ifheroes.core.profile.levelstructur.DomainKey;
-import de.ifheroes.core.warehouse.Section;
 
 /**
  * The PluginDataImpl class provides a concrete implementation of the PluginData interface.

@@ -1,4 +1,4 @@
-package de.ifheroes.core.warehouse;
+package de.ifheroes.core.data.warehouse;
 
 import java.util.HashMap;
 import java.util.Map;

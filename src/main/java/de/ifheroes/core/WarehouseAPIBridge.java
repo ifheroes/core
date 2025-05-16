@@ -34,6 +34,8 @@ public class WarehouseAPIBridge implements InfinityHeroesCoreAPI{
 
 	private static ConcurrentHashMap<UUID, CompletableFuture<HeroProfile>> profileCache = new ConcurrentHashMap<>();
 	
+	protected InfinityHeroesCoreAPIImpl() {}
+	
 	private Warehouse warehouse;
 	
 	/*

@@ -12,6 +12,14 @@ E:\EWorkSpace\InfinityHeroesCore\src\main\java\de\ifheroes\core\data\warehouse\S
 E:\EWorkSpace\InfinityHeroesCore\src\main\java\de\ifheroes\core\data\warehouse\Warehouse.java
 E:\EWorkSpace\InfinityHeroesCore\src\main\java\de\ifheroes\core\data\warehouse\WarehouseImpl.java
 E:\EWorkSpace\InfinityHeroesCore\src\main\java\de\ifheroes\core\File.java
+E:\EWorkSpace\InfinityHeroesCore\src\main\java\de\ifheroes\core\helper\gui\elements\GUIElement.java
+E:\EWorkSpace\InfinityHeroesCore\src\main\java\de\ifheroes\core\helper\gui\elements\IGUIElement.java
+E:\EWorkSpace\InfinityHeroesCore\src\main\java\de\ifheroes\core\helper\gui\elements\LinkedGUIElement.java
+E:\EWorkSpace\InfinityHeroesCore\src\main\java\de\ifheroes\core\helper\gui\GUIHolder.java
+E:\EWorkSpace\InfinityHeroesCore\src\main\java\de\ifheroes\core\helper\gui\GUIManager.java
+E:\EWorkSpace\InfinityHeroesCore\src\main\java\de\ifheroes\core\helper\gui\listeners\InventoryClick.java
+E:\EWorkSpace\InfinityHeroesCore\src\main\java\de\ifheroes\core\helper\gui\masks\GUIMask.java
+E:\EWorkSpace\InfinityHeroesCore\src\main\java\de\ifheroes\core\helper\gui\masks\IGUIMask.java
 E:\EWorkSpace\InfinityHeroesCore\src\main\java\de\ifheroes\core\InfinityHeroesCoreAPI.java
 <<<<<<< Updated upstream
 E:\EWorkSpace\InfinityHeroesCore\src\main\java\de\ifheroes\core\InfinityHeroesCoreAPIImpl.java

@@ -32,6 +32,7 @@ public class InfinityHeroesCorePlugin extends JavaPlugin {
 	    Bukkit.getPluginManager().registerEvents((Listener)new ProfileRegister(), (Plugin)this);
 	    Bukkit.getPluginManager().registerEvents((Listener)new GUIInteract(), (Plugin)this);
 	    try {
+	    	//TODO: was soll das?
 	      System.out.println("" + ((api.getWarehouse() != null) ? 1 : 0) + " warehouse");
 	    } catch (WarehouseNotInitializedException e) {
 	      e.printStackTrace();

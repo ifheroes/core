@@ -8,19 +8,11 @@ import java.net.HttpURLConnection;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 
-<<<<<<< Updated upstream:src/main/java/de/ifheroes/core/warehouse/restapi/RestAPIImpl.java
 import de.ifheroes.core.Logger;
 import de.ifheroes.core.Logger.LogLevel;
-import de.ifheroes.core.warehouse.exceptions.DeleteRequestFailedException;
-import de.ifheroes.core.warehouse.exceptions.GetRequestFailedException;
-import de.ifheroes.core.warehouse.exceptions.PostRequestFailedException;
-=======
-import org.bukkit.Bukkit;
-
 import de.ifheroes.core.data.warehouse.exceptions.DeleteRequestFailedException;
 import de.ifheroes.core.data.warehouse.exceptions.GetRequestFailedException;
 import de.ifheroes.core.data.warehouse.exceptions.PostRequestFailedException;
->>>>>>> Stashed changes:src/main/java/de/ifheroes/core/data/warehouse/restapi/RestAPIImpl.java
 
 /*
  * Adjust HTTP Request Timeout to API waiting times

@@ -1,10 +1,10 @@
-package de.ifheroes.core.warehouse;
+package de.ifheroes.core.data.warehouse;
 
 import java.util.Optional;
 
 import com.google.gson.JsonObject;
 
-import de.ifheroes.core.warehouse.exceptions.GetRequestFailedException;
+import de.ifheroes.core.data.warehouse.exceptions.GetRequestFailedException;
 
 /*
  * Represents the usage of the InfinityHeroes-Warehouse

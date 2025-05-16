@@ -1,4 +1,4 @@
-package de.ifheroes.core.warehouse.exceptions;
+package de.ifheroes.core.data.warehouse.exceptions;
 
 import de.ifheroes.core.Logger;
 import de.ifheroes.core.Logger.LogLevel;

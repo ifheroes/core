@@ -1,4 +1,4 @@
-package de.ifheroes.core.warehouse;
+package de.ifheroes.core.data.warehouse;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -6,11 +6,11 @@ import java.util.Optional;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
-import de.ifheroes.core.warehouse.exceptions.DeleteRequestFailedException;
-import de.ifheroes.core.warehouse.exceptions.GetRequestFailedException;
-import de.ifheroes.core.warehouse.exceptions.PostRequestFailedException;
-import de.ifheroes.core.warehouse.restapi.RestAPI;
-import de.ifheroes.core.warehouse.restapi.RestAPIImpl;
+import de.ifheroes.core.data.warehouse.exceptions.DeleteRequestFailedException;
+import de.ifheroes.core.data.warehouse.exceptions.GetRequestFailedException;
+import de.ifheroes.core.data.warehouse.exceptions.PostRequestFailedException;
+import de.ifheroes.core.data.warehouse.restapi.RestAPI;
+import de.ifheroes.core.data.warehouse.restapi.RestAPIImpl;
 
 /*
  * Represents the implementation of the Warehouse

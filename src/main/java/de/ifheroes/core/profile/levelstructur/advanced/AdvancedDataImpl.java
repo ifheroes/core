@@ -2,9 +2,9 @@ package de.ifheroes.core.profile.levelstructur.advanced;
 
 import java.util.UUID;
 
+import de.ifheroes.core.data.warehouse.Section;
 import de.ifheroes.core.profile.events.EventBound;
 import de.ifheroes.core.profile.types.HeroProfileLanguage;
-import de.ifheroes.core.warehouse.Section;
 
 /**
  * The AdvancedDataImpl class is a concrete implementation of the AdvancedData interface.

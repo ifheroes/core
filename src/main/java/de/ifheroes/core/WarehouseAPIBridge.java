@@ -14,20 +14,23 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 
+<<<<<<< Updated upstream:src/main/java/de/ifheroes/core/InfinityHeroesCoreAPIImpl.java
 import de.ifheroes.core.Logger.LogLevel;
+=======
+import de.ifheroes.core.data.warehouse.PostRequestBody;
+import de.ifheroes.core.data.warehouse.Section;
+import de.ifheroes.core.data.warehouse.Warehouse;
+import de.ifheroes.core.data.warehouse.exceptions.GetRequestFailedException;
+import de.ifheroes.core.data.warehouse.exceptions.WarehouseNotInitializedException;
+>>>>>>> Stashed changes:src/main/java/de/ifheroes/core/WarehouseAPIBridge.java
 import de.ifheroes.core.profile.HeroProfile;
 import de.ifheroes.core.profile.HeroProfileImpl;
 import de.ifheroes.core.profile.levelstructur.basic.BasicDataImpl;
-import de.ifheroes.core.warehouse.PostRequestBody;
-import de.ifheroes.core.warehouse.Section;
-import de.ifheroes.core.warehouse.Warehouse;
-import de.ifheroes.core.warehouse.exceptions.GetRequestFailedException;
-import de.ifheroes.core.warehouse.exceptions.WarehouseNotInitializedException;
 
 /*
  * This class represents the official interaction to others plugins
  */
-public class InfinityHeroesCoreAPIImpl implements InfinityHeroesCoreAPI{
+public class WarehouseAPIBridge implements InfinityHeroesCoreAPI{
 
 	private static ConcurrentHashMap<UUID, CompletableFuture<HeroProfile>> profileCache = new ConcurrentHashMap<>();
 	
@@ -59,8 +62,13 @@ public class InfinityHeroesCoreAPIImpl implements InfinityHeroesCoreAPI{
 		} catch (InterruptedException | ExecutionException e) {
 			e.printStackTrace();
 		}
+<<<<<<< Updated upstream:src/main/java/de/ifheroes/core/InfinityHeroesCoreAPIImpl.java
 		new Logger(LogLevel.ERROR).error("COULD NOT LOAD PROFILE %s".formatted(uuid.toString()));
 		return null;
+=======
+		Bukkit.getLogger().warning("COULD NOT LOAD PROFILE %s".formatted(uuid.toString()));
+		return Optional.empty();
+>>>>>>> Stashed changes:src/main/java/de/ifheroes/core/WarehouseAPIBridge.java
 	}
 	
 	

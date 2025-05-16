@@ -1,4 +1,4 @@
-package de.ifheroes.core.warehouse;
+package de.ifheroes.core.data.warehouse;
 
 public enum Section {
 

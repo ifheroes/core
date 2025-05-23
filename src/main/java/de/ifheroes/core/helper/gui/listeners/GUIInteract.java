@@ -17,6 +17,7 @@ public class GUIInteract implements Listener{
 	@EventHandler
 	public void guiClick(InventoryClickEvent event) {
 		Inventory inventory = event.getClickedInventory();
+		if(inventory.getHolder() == null) return;
 		if(!(inventory.getHolder() instanceof GUIHolder)) return;
 		
 		Optional<UUID> elementID = GUIElement.getIDFromItemStack(event.getCurrentItem());

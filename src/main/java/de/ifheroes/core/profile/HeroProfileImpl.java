@@ -9,7 +9,7 @@ import de.ifheroes.core.profile.levelstructur.advanced.AdvancedDataImpl;
 import de.ifheroes.core.profile.levelstructur.basic.BasicData;
 import de.ifheroes.core.profile.levelstructur.basic.BasicDataImpl;
 import de.ifheroes.core.profile.levelstructur.plugin.PluginData;
-import de.ifheroes.core.profile.levelstructur.plugin.PluginDataImpl;
+import de.ifheroes.core.profile.levelstructur.plugin.PluginDataImplGson;
 import de.ifheroes.core.profile.types.HeroProfileLanguage;
 
 /**
@@ -24,12 +24,12 @@ public class HeroProfileImpl implements HeroProfile{
 	
 	private BasicDataImpl basicData;
 	private AdvancedDataImpl advancedData;
-	private PluginDataImpl pluginData;
+	private PluginDataImplGson pluginData;
 
 	public HeroProfileImpl(BasicDataImpl basicData) {
 		setBasicData(basicData);
 		setAdvancedData(new AdvancedDataImpl(getUUID()));
-		setPluginData(new PluginDataImpl(getUUID()));
+		setPluginData(new PluginDataImplGson(getUUID()));
 	}
 	
 	@Override
@@ -85,7 +85,7 @@ public class HeroProfileImpl implements HeroProfile{
         return this.pluginData;
     }
 
-    private void setPluginData(PluginDataImpl pluginData) {
+    private void setPluginData(PluginDataImplGson pluginData) {
         this.pluginData = pluginData;
     }
     

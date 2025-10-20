@@ -17,6 +17,7 @@ import de.ifheroes.core.profile.events.EventBound;
 import de.ifheroes.core.profile.levelstructur.DomainKey;
 
 /**
+ * temp
  * The PluginDataImpl class provides a concrete implementation of the PluginData interface.
  * It manages plugin-specific data using a nested map structure where the first level key represents
  * the domain (usually the plugin name), and the second level key represents specific data identifiers.
@@ -30,7 +31,7 @@ public class PluginDataImplGson extends EventBound implements PluginData {
      * Default constructor.
      * Initializes the internal map to an empty HashMap.
      */
-    public PluginDataImplGson(UUID uuid) {
+    private PluginDataImplGson(UUID uuid) {
         this.values = new JsonObject();
         this.uuid = uuid;
     }

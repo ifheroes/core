@@ -14,19 +14,14 @@ E:\EWorkSpace\InfinityHeroesCore\src\main\java\de\ifheroes\core\data\warehouse\W
 E:\EWorkSpace\InfinityHeroesCore\src\main\java\de\ifheroes\core\File.java
 E:\EWorkSpace\InfinityHeroesCore\src\main\java\de\ifheroes\core\helper\gui\elements\GUIElement.java
 E:\EWorkSpace\InfinityHeroesCore\src\main\java\de\ifheroes\core\helper\gui\elements\IGUIElement.java
-E:\EWorkSpace\InfinityHeroesCore\src\main\java\de\ifheroes\core\helper\gui\elements\LinkedGUIElement.java
 E:\EWorkSpace\InfinityHeroesCore\src\main\java\de\ifheroes\core\helper\gui\GUIHolder.java
 E:\EWorkSpace\InfinityHeroesCore\src\main\java\de\ifheroes\core\helper\gui\GUIManager.java
-E:\EWorkSpace\InfinityHeroesCore\src\main\java\de\ifheroes\core\helper\gui\listeners\InventoryClick.java
+E:\EWorkSpace\InfinityHeroesCore\src\main\java\de\ifheroes\core\helper\gui\listeners\GUIInteract.java
 E:\EWorkSpace\InfinityHeroesCore\src\main\java\de\ifheroes\core\helper\gui\masks\GUIMask.java
 E:\EWorkSpace\InfinityHeroesCore\src\main\java\de\ifheroes\core\helper\gui\masks\IGUIMask.java
 E:\EWorkSpace\InfinityHeroesCore\src\main\java\de\ifheroes\core\InfinityHeroesCoreAPI.java
-<<<<<<< Updated upstream
-E:\EWorkSpace\InfinityHeroesCore\src\main\java\de\ifheroes\core\InfinityHeroesCoreAPIImpl.java
 E:\EWorkSpace\InfinityHeroesCore\src\main\java\de\ifheroes\core\InfinityHeroesCorePlugin.java
 E:\EWorkSpace\InfinityHeroesCore\src\main\java\de\ifheroes\core\Logger.java
-=======
->>>>>>> Stashed changes
 E:\EWorkSpace\InfinityHeroesCore\src\main\java\de\ifheroes\core\profile\events\EventBound.java
 E:\EWorkSpace\InfinityHeroesCore\src\main\java\de\ifheroes\core\profile\events\HeroProfileUpdateEvent.java
 E:\EWorkSpace\InfinityHeroesCore\src\main\java\de\ifheroes\core\profile\HeroProfile.java
@@ -38,5 +33,6 @@ E:\EWorkSpace\InfinityHeroesCore\src\main\java\de\ifheroes\core\profile\levelstr
 E:\EWorkSpace\InfinityHeroesCore\src\main\java\de\ifheroes\core\profile\levelstructur\DomainKey.java
 E:\EWorkSpace\InfinityHeroesCore\src\main\java\de\ifheroes\core\profile\levelstructur\plugin\PluginData.java
 E:\EWorkSpace\InfinityHeroesCore\src\main\java\de\ifheroes\core\profile\levelstructur\plugin\PluginDataImpl.java
+E:\EWorkSpace\InfinityHeroesCore\src\main\java\de\ifheroes\core\profile\levelstructur\plugin\PluginDataImplGson.java
 E:\EWorkSpace\InfinityHeroesCore\src\main\java\de\ifheroes\core\profile\types\HeroProfileLanguage.java
 E:\EWorkSpace\InfinityHeroesCore\src\main\java\de\ifheroes\core\WarehouseAPIBridge.java

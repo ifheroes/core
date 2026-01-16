@@ -98,7 +98,6 @@ public class RestAPIImpl implements RestAPI{
 	public boolean sendPostRequest(String endpoint, String jsonInputString)
 			throws IOException, PostRequestFailedException {
 		
-		long startmilis = System.currentTimeMillis();
 		String url = baseUrl;
 		HttpURLConnection connection = createHttpConnection(url, HttpMethode.POST);
 		
@@ -109,7 +108,6 @@ public class RestAPIImpl implements RestAPI{
 
 		int responseCode = connection.getResponseCode();
 		if (responseCode == HttpURLConnection.HTTP_OK || responseCode == HttpURLConnection.HTTP_CREATED) {
-			new Logger(LogLevel.INFO).info("PostRequest: %s".formatted(System.currentTimeMillis()-startmilis));
 			return true;
 		} else {
 			throw new PostRequestFailedException(endpoint, jsonInputString, responseCode);

@@ -10,6 +10,7 @@ import de.ifheroes.core.profile.levelstructur.basic.BasicData;
 import de.ifheroes.core.profile.levelstructur.basic.BasicDataImpl;
 import de.ifheroes.core.profile.levelstructur.plugin.PluginData;
 import de.ifheroes.core.profile.levelstructur.plugin.PluginDataImpl;
+import de.ifheroes.core.profile.levelstructur.plugin.PluginDataImplGson;
 import de.ifheroes.core.profile.types.HeroProfileLanguage;
 
 /**
